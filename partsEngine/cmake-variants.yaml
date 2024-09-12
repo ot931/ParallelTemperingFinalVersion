@@ -1,0 +1,43 @@
+buildType:
+  default: debug
+  choices:
+    debug:
+      short: Debug
+      long: Emit debug information
+      buildType: Debug
+    release:
+      short: Release
+      long: Optimize generated code
+      buildType: Release
+    relwdbg:
+      short: RelWithDebInfo
+      long: Release for debugging
+      buildType: RelWithDebInfo
+
+tests:
+  default: disable tests
+  choices:
+    enabled:
+      short: enable tests
+      long: Enable building test cases
+      settings:
+        BUILD_TESTS: YES
+    disabled:
+      short: disable tests
+      long: Disable building test cases
+      settings:
+        BUILD_TESTS: NO
+
+addexec:
+  default: add exetuable
+  choices:
+    enabled:
+      short: add exetuable
+      long: add the executable file from dbg folder
+      settings:
+        BUILD_DEBUG: YES
+    disabled:
+      short: exclude exetuable
+      long: do not build the executable file from dbg folder
+      settings:
+        BUILD_DEBUG: NO

@@ -1,0 +1,9 @@
+[submodule "argumentum-src"]
+	path = argumentum-src
+	url = https://github.com/mmahnic/argumentum.git
+[submodule "partsEngine"]
+	path = partsEngine
+	url = https://github.com/uyras/partsEngine
+[submodule "inicpp"]
+	path = inicpp
+	url = ../../SemaiCZE/inicpp.git
