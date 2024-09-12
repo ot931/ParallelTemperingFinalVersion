@@ -25,7 +25,7 @@
 #include "misc.h"
 #include <gsl/gsl_multifit.h>
 #include <gsl/gsl_cdf.h>
-#include <gsl/gsl_randist.h.>
+#include <gsl/gsl_randist.h>
 #include "interpolation_class.h"
 
 struct monteCarloStatistics {
@@ -354,7 +354,7 @@ monteCarloStatistics montecarlo(ConfigManager &config){
 					
 					std::ofstream out;
 	
-					out.open("Capacities.txt")
+					out.open("Capacities.txt");
 					if (out.is_open())
 					{
 						out << cT.get_mpf_t() << " ";
@@ -441,7 +441,7 @@ int main(int argc, char *argv[])
 				config->applyState(statData.finalStates[j]);
 			}
 		}
-		statData.foungLowerEnergy = false;
+		statData.foundLowerEnergy = false;
 	/*
 		if (statData.foundLowerEnergy){
 			config->applyState(statData.lowerEnergyState);
@@ -498,7 +498,7 @@ int main(int argc, char *argv[])
 */
 	std::ofstream out;
 	
-	out.open("Temperatures.txt")
+	out.open("Temperatures.txt");
 	if (out.is_open())
 	{
 		for (double x : config->temperatures) out << x << " ";

@@ -37,7 +37,7 @@ list(JOIN example_string_a  "\\n"  example_string)
 configure_file(defines.h.in defines.h)
 
 add_executable(metropolis ${METROPOLIS_SRC})
-target_link_libraries(metropolis partsEngine gmp gmpxx OpenMP::OpenMP_CXX argumentum inicpp)
+target_link_libraries(metropolis partsEngine gmp gmpxx OpenMP::OpenMP_CXX argumentum inicpp gsl openblas)
 target_include_directories(metropolis PUBLIC "${PROJECT_BINARY_DIR}")
 
 add_executable(distanceAnalyser distanceAnalyser.cpp)

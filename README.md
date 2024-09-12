@@ -1,10 +1,10 @@
-# How to build metropolis
+# How to build parallel tempering
 
-First, make sure that GMP library is installed (https://gmplib.org/).
+First, make sure that GMP library is installed (https://gmplib.org/) and GSL
 
 ```
-git clone --recurse-submodules https://github.com/uyras/metropolis.git
-cd metropolis
+git clone --recurse-submodules https://github.com/ot931/ParallelTemperingFinalVersion.git
+cd ParallelTemperingFinalVersion
 mkdir build && cd build
 cmake ..
 cmake --build .
