@@ -352,15 +352,15 @@ monteCarloStatistics montecarlo(ConfigManager &config){
 
 					mpf_class cT = (e2 - (e * e)) / (t * t * N);
 					
-					std::ofstream out;
+					std::ofstream out_c;
 	
-					out.open("Capacities.txt");
-					if (out.is_open())
+					out_c.open("Capacities.txt", iostream::app);
+					if (out_c.is_open())
 					{
-						out << cT.get_mpf_t() << " ";
-						out << "\n";
+						out_c << cT.get_mpf_t() << " ";
+						out_c << "\n";
 					}
-					out.close();
+					out_c.close();
 
 					statData.finalStates[tt] = sys.state.toString();
 					statData.finalEnergies[tt] = eOld;
@@ -371,6 +371,16 @@ monteCarloStatistics montecarlo(ConfigManager &config){
 						gmp_printf("%e %.30Fe %.30Fe %.30Fe %d %d",
 								t, cT.get_mpf_t(), e.get_mpf_t(), e2.get_mpf_t(),
 								omp_get_thread_num(), trseed);
+
+						std::ofstream out_data;
+						out_data.open("Apamea_Out.txt", iostream::app);
+						if (out_data.is_open())
+						{
+							out_data << cT.get_mpf_t() << " ";
+							out_data << "\n";
+						}
+						out_data.close();
+
 						for (auto &cp : calculationParameters)
 						{
 							gmp_printf(" %.30Fe %.30Fe",
@@ -396,8 +406,15 @@ monteCarloStatistics montecarlo(ConfigManager &config){
 
 int main(int argc, char *argv[])
 {
-	auto time_start = std::chrono::steady_clock::now();
+	std::ofstream out_c;
+	out_c.open("Capacities.txt");
+	out_c.close();
 
+	std::ofstream out_data;
+	out_data.open("Apamea_Out.txt");
+	out_data.close();
+
+	auto time_start = std::chrono::steady_clock::now();
 	auto config = readParameters(argc,argv);
 	if (!config){
 		return 0;
@@ -410,19 +427,20 @@ int main(int argc, char *argv[])
 	std::string finalState = config->getSystem().state.toString();
 	do {
 		//ConfigManager data_temperatures = config; 
-		for (int i = 0; i < k; k++)
+		for (int i = 0; i < k; i++)
 		{
+			std::cout << "Balancing temperatures: " << i << "/" << k << " ";
+			std::cout << std::endl; 
 			statData = montecarlo(*config); // запуск самих вычислений
-			for (int j = 0; j < config->temperatures.size(); j++)
-			{
-				config->temperatures = interpolation_temperatures_(config->temperatures, statData.finalEnergies, config->temperatures.size());
-			}
+			config->temperatures = interpolation_temperatures_(config->temperatures, statData.finalEnergies, config->temperatures.size());
 		}
 	        std::mt19937 gen((int)time(0));
         	std::uniform_real_distribution<> urd(0., 1.);
 
-		for (int i = 0; i < D; D++)
-		{
+		for (int i = 0; i < D; i++)
+		{	
+			std::cout << "Tempering: " << i << "/" << k << " ";
+			std::cout << std::endl;
 			statData = montecarlo(*config); // запуск самих вычислений
 			for (int j = config->temperatures.size() - 2; j > -1; j--)
 			{ 
