@@ -1,6 +1,6 @@
-# How to build parallel tempering
+# Как собрать алгоритм параллельного отжига
 
-First, make sure that GMP library is installed (https://gmplib.org/) and GSL
+Сперва убедитесь, что у вас установлены GMP (https://gmplib.org/) и GSL
 
 ```
 git clone --recurse-submodules https://github.com/ot931/ParallelTemperingFinalVersion.git
@@ -10,6 +10,12 @@ cmake ..
 cmake --build .
 ```
 
-# How to use
+# Как пользоваться
 
-Just run `./metropolis --help`, and read.
+Запустите `./metropolis --help`, и прочтите содержимое.
+
+# Благодарности
+
+Программа разработана за счет гранта Российского научного фонда № 23-22-00328, [https://rscf.ru/project/23-22-00328/](https://rscf.ru/project/23-22-00328/)
+
+Проверено на суперкомпьютерном вычислительном кластере Института прикладной математики ДВО РАН.
